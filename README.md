@@ -13,3 +13,17 @@ To install the necessary dependencies run:
 ```shell
 bundle install
 ```
+
+## Running tests and checking code quality
+
+To run the unit tests:
+
+```shell
+rspec
+```
+
+To run checks for style guidelines:
+
+```shell
+rubocop
+``` 
