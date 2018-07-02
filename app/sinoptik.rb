@@ -1,28 +1,14 @@
-require 'mechanize'
+require_relative 'weather'
 
-class SinoptikWeatherApp
+class SinoptikWeatherApp < WeatherApp
   WEATHER_APP_URI = 'http://weather.sinoptik.bg/'.freeze
 
   def initialize
-    @agent = Mechanize.new
-  end
-
-  def weather(city)
-    weather_page = get_weather_page(city)
-
-    return nil unless weather_page
-
-    found_city = weather_page.css('h1.currentCity')
-    current_temperature = weather_page.css('span.wfCurrentTemp')
-    current_feel_temperature = weather_page.css('span.wfCurrentFeelTemp')
-    current_weather_state = weather_page.css('div.wfCurrentContent > strong')
-
-    [
-      found_city,
-      current_temperature,
-      current_feel_temperature,
-      current_weather_state
-    ].map { |elem| elem.map(&:text).first.strip }
+    super
+    @city_selector = 'h1.currentCity'
+    @temp_selector = 'span.wfCurrentTemp'
+    @feel_temp_selector = 'span.wfCurrentFeelTemp'
+    @weather_state = 'div.wfCurrentContent > strong'
   end
 
   private

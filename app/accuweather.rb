@@ -1,28 +1,14 @@
-require 'mechanize'
+require_relative 'weather'
 
-class AccuWeatherApp
+class AccuWeatherApp < WeatherApp
   WEATHER_APP_URI = 'https://m.accuweather.com/en/settings'.freeze
 
   def initialize
-    @agent = Mechanize.new
-  end
-
-  def weather(city)
-    weather_page = get_weather_page(city)
-
-    return nil unless weather_page
-
-    found_city = weather_page.css('h1#location')
-    current_temperature = weather_page.css('.temp')
-    current_feel_temperature = weather_page.css('.ltr')
-    current_weather_state = weather_page.css('p.lg-txt')
-
-    [
-      found_city,
-      current_temperature,
-      current_feel_temperature,
-      current_weather_state
-    ].map { |elem| elem.map(&:text).first.strip }
+    super
+    @city_selector = 'h1#location'
+    @temp_selector = '.temp'
+    @feel_temp_selector = '.ltr'
+    @weather_state = 'p.lg-txt'
   end
 
   private
