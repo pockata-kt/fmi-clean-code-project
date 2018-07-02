@@ -46,6 +46,6 @@ rubocop
 
 ## TO-DO:
 - [x] Add a dashboard to show the collected information
-- [ ] Use inheritance to reduce code duplication
+- [x] Use inheritance to reduce code duplication
 - [ ] Add error handling
 - [ ] Write unit tests
