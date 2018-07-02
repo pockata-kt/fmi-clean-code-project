@@ -35,7 +35,7 @@ class WeatherApp
     begin
       yield
     rescue SocketError
-      raise if retry_count > REQUEST_RETRY_LIMIT
+      raise if retry_count >= REQUEST_RETRY_LIMIT
 
       sleep REQUEST_SECONDS_DELAY
 
