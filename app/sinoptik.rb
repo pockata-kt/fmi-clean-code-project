@@ -22,7 +22,7 @@ class SinoptikWeatherApp
       current_temperature,
       current_feel_temperature,
       current_weather_state
-    ].map { |elem| elem.map(&:text).first }
+    ].map { |elem| elem.map(&:text).first.strip }
   end
 
   private
