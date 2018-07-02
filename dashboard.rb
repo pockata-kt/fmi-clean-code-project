@@ -12,13 +12,17 @@ class Dashboard
     sinoptik_info = @sinoptik_app.weather(city)
 
     pretty_print([accu_info, sinoptik_info])
+  rescue ArgumentError => ex
+    puts ex.message
+  rescue SocketError
+    puts 'Failed to establish internet connection. Please try again later.'
   end
 
   def pretty_print(weather_info)
     combined_info = weather_info[0].zip(weather_info[1])
     combined_info.map! { |field_array| field_array.uniq.join('/') }
 
-    puts "\nThe information that we found about #{combined_info.shift}:"
+    puts "The information that we found about #{combined_info.shift}:"
     puts combined_info
   end
 end
@@ -30,6 +34,8 @@ class App
     puts 'Welcome to the Weather App'
     puts 'Please enter the city you want information about:'
     city = gets.chomp
+
+    puts "\n"
 
     @dashboard.show_weather_info(city)
   end
