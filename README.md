@@ -9,11 +9,14 @@ This application is not affiliated with any of the information providers in any 
 
 Can be found [here](docs/).
 
-## Prerequisites
- - Ruby (tested on 2.5.0)
- - Bundle (tested on 1.16.2)
+## Running the application
 
-## Installing dependencies
+### Prerequisites
+
+ - Ruby (tested on 2.5.0)
+ - Bundler (tested on 1.16.2)
+
+### Installing dependencies
 
 To install the necessary dependencies run:
 
@@ -21,7 +24,13 @@ To install the necessary dependencies run:
 bundle install
 ```
 
-## Running tests and checking code quality
+### Running
+
+```shell
+ruby dashboard.rb
+```
+
+## Testing and style guidelines
 
 To run the unit tests:
 
@@ -36,7 +45,7 @@ rubocop
 ```
 
 ## TO-DO:
-- [ ] Add a dashboard to show the collected information
+- [x] Add a dashboard to show the collected information
 - [ ] Use inheritance to reduce code duplication
 - [ ] Add error handling
 - [ ] Write unit tests
