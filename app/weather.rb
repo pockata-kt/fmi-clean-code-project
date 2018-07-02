@@ -1,6 +1,8 @@
 require 'mechanize'
 
 class WeatherApp
+  REQUEST_RETRY_LIMIT = 5
+  REQUEST_SECONDS_DELAY = 2
   WEATHER_APP_URI = ''.freeze
 
   def initialize
@@ -8,9 +10,9 @@ class WeatherApp
   end
 
   def weather(city)
-    weather_page = get_weather_page(city)
+    weather_page = error_handler { get_weather_page(city) }
 
-    return nil unless weather_page
+    raise ArgumentError, 'City not found' unless weather_page
 
     found_city = weather_page.css(@city_selector)
     current_temperature = weather_page.css(@temp_selector)
@@ -26,6 +28,22 @@ class WeatherApp
   end
 
   private
+
+  def error_handler
+    retry_count = 0
+
+    begin
+      yield
+    rescue SocketError
+      raise if retry_count > REQUEST_RETRY_LIMIT
+
+      sleep REQUEST_SECONDS_DELAY
+
+      retry_count += 1
+
+      retry
+    end
+  end
 
   def get_weather_page(city); end
 

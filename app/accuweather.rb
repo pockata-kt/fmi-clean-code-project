@@ -5,6 +5,7 @@ class AccuWeatherApp < WeatherApp
 
   def initialize
     super
+
     @city_selector = 'h1#location'
     @temp_selector = '.temp'
     @feel_temp_selector = '.ltr'

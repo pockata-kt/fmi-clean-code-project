@@ -5,6 +5,7 @@ class SinoptikWeatherApp < WeatherApp
 
   def initialize
     super
+
     @city_selector = 'h1.currentCity'
     @temp_selector = 'span.wfCurrentTemp'
     @feel_temp_selector = 'span.wfCurrentFeelTemp'
